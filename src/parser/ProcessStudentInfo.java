@@ -35,6 +35,8 @@ public class ProcessStudentInfo {
 		 *
 		 */
 
+		//Can't seem to connect to database
+
 			public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException {
 				//Path of XML data to be read.
 				String pathSelenium  = System.getProperty("user.dir") +"/src/parser/selenium.xml";

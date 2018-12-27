@@ -5,9 +5,6 @@ import databases.ConnectToSqlDB;
 import java.util.List;
 import java.util.Random;
 
-/*
- *Created by mrahman on 04/02/2018.
- */
 public class Numbers {
 
 	/*
@@ -21,40 +18,74 @@ public class Numbers {
 	 */
 
 	public static void main(String[] args) throws Exception {
-		
-		int [] num = new int[1000000];
-		storeRandomNumbers(num);
-		ConnectToSqlDB connectToSqlDB = new ConnectToSqlDB();
+
+		int [] num = new int[100];
+
+		Random rand = new Random();
+		for(int i=0; i<num.length; i++){
+			num[i] = rand.nextInt(1000);
+		}
+
+
+
 		//Selection Sort
 		Sort algo = new Sort();
 		algo.selectionSort(num);
 		long selectionSortExecutionTime = algo.executionTime;
 		System.out.println("Total Execution Time of "+ num.length + " numbers in Selection Sort take: " + selectionSortExecutionTime + " milli sec");
-        connectToSqlDB.insertDataFromArrayToSqlTable(num, "selection_sort", "SortingNumbers");
-        List<String> numbers = connectToSqlDB.readDataBase("selection_sort", "SortingNumbers");
-        printValue(numbers);
+
 		int n = num.length;
 		randomize (num, n);
+
 		//Insertion Sort
 		algo.insertionSort(num);
 		long insertionSortExecutionTime = algo.executionTime;
 		System.out.println("Total Execution Time of " + num.length + " numbers in Insertion Sort take: " + insertionSortExecutionTime + " milli sec");
 
-		//By following above, Continue for rest of the Sorting Algorithm....
+		randomize (num, n);
+
+		//Bubble Sort
+		algo.bubbleSort(num);
+		long bubbleSortExecutionTime = algo.executionTime;
+		System.out.println("Total Execution Time of " + num.length + " numbers in Bubble Sort take: " + bubbleSortExecutionTime + " milli sec");
+		randomize (num, n);
+
+		//Merge Sort
+		algo.mergeSort(num);
+		long mergeSortExecutionTime = algo.executionTime;
+		System.out.println("Total Execution Time of " + num.length + " numbers in Merge Sort take: " + mergeSortExecutionTime + " milli sec");
 
 
+		randomize (num, n);
 
+		//Quick Sort
+		algo.quickSort(num);
+		long quickSortExecutionTime = algo.executionTime;
+		System.out.println("Total Execution Time of " + num.length + " numbers in Quick Sort take: " + quickSortExecutionTime + " milli sec");
 
-		//Come to conclusion about which Sorting Algo is better in given data set.
+		randomize (num, n);
 
-	}
+		//Heap Sort
+		algo.heapSort(num);
+		long heapSortExecutionTime = algo.executionTime;
+		System.out.println("Total Execution Time of " + num.length + " numbers in Heap Sort take: " + heapSortExecutionTime + " milli sec");
 
-	public static void storeRandomNumbers(int [] num){
-		Random rand = new Random();
-		for(int i=0; i<num.length; i++){
-			num[i] = rand.nextInt(1000000);
+		randomize (num, n);
+
+		//Bucket Sort
+		algo.bucketSort(num);
+		long bucketSortExecutionTime = algo.executionTime;
+		System.out.println("Total Execution Time of " + num.length + " numbers in Bucket Sort take: " + bucketSortExecutionTime + " milli sec");
+
+		randomize (num, n);
+
+		//Shell Sort
+		algo.shellSort(num);
+		long shellSortExecutionTime = algo.executionTime;
+		System.out.println("Total Execution Time of " + num.length + " numbers in Shell Sort take: " + shellSortExecutionTime + " milli sec");
+
 		}
-	}
+
 
 	public static void randomize( int arr[], int n)
 	{
@@ -68,9 +99,7 @@ public class Numbers {
 			arr[j] = temp;
 		}
 	}
-	public static void printValue(List<String> array){
-		for(String st:array){
-			System.out.println(st);
-		}
-	}
 }
+
+// Insertion Sort seems to be the fastest sorting order. While Selection sort took 64 milli sec, Insertion
+// took only 0. ALso for some reason couldn't connect to database so I comments it out and just did pure algorithm
